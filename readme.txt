@@ -1,4 +1,9 @@
-Holiday 0.3
+Holiday 2.0
+Adapted for use in w2p v3.0 and above by Sasquatch
+- updated class calls
+- additions and corrections for NZ holidays as at 2013-12
+
+Holiday 0.3 (original)
 CaseySoftware, LLC
 webmaster@caseysoftware.com
 
