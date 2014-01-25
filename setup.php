@@ -14,35 +14,38 @@ if (!defined('W2P_BASE_DIR'))
  */
  
 $config = array();
-$config['mod_name'] = 'Holiday';                                    // the module name
-$config['mod_version'] = '2.0';                                     // this release version
-$config['mod_directory'] = 'holiday';                               // the module path
-$config['mod_setup_class'] = 'CSetupHolidays';                       // the name of the setup class
-$config['mod_type'] = 'user';                                       // 'core' for modules distributed with w2p itself, 'user' for addon modules
-$config['mod_ui_name'] = $config['mod_name'];                       // the name that is shown in the main menu of the User Interface
-$config['mod_ui_icon'] = 'myevo-appointments.png';                  // name of a related icon
-$config['mod_description'] = 'A module for setting working time';   // some description of the module
-$config['mod_config'] = false;                                      // show 'configure' link in viewmods
-$config['mod_main_class'] = 'CHoliday';
-$config['permissions_item_table'] = 'holiday';
-$config['permissions_item_label'] = 'holiday_description';
-$config['permissions_item_field'] = 'holiday_id';
+$config['mod_name'] 				= 'Holiday';                            // the module name
+$config['mod_version'] 				= '2.1';                                // this release version
+$config['mod_directory'] 			= 'holiday';                            // the module path
+$config['mod_setup_class'] 			= 'CSetupHolidays';                     // the name of the setup class
+$config['mod_type']					= 'user';                               // 'core' for modules distributed with w2p itself, 'user' for addon modules
+$config['mod_ui_name'] 				= $config['mod_name'];                  // the name that is shown in the main menu of the User Interface
+$config['mod_ui_icon'] 				= 'myevo-appointments.png';             // name of a related icon
+$config['mod_description'] 			= 'A module for setting working time';  // some description of the module
+$config['mod_config'] 				= false;                                // show 'configure' link in viewmods
+$config['mod_main_class'] 			= 'CHoliday';
+$config['permissions_item_table'] 	= 'holiday';
+$config['permissions_item_label'] 	= 'holiday_description';
+$config['permissions_item_field'] 	= 'holiday_id';
+$config['requirements']             = array(
+		array('require' => 'web2project',   'comparator' => '>=', 'version' => '3')
+    );                                    // don't install if less than v3
 
 if (@$a == 'setup') {
     echo w2PshowModuleConfig( $config );
 }
 
-class CSetupHolidays
-{
-
+class CSetupHolidays extends w2p_System_Setup {
     public function install()
     {
-        global $AppUI;
+        $result = $this->_meetsRequirements();
+        if (!$result) {
+            return false;
+        }
 
-        // Create holiday table
-        $q = new w2p_Database_Query();
+        $q = $this->_getQuery();
         $q->createTable('holiday');
-        $q->createDefinition('(
+        $sql = '(
             `holiday_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
             `holiday_user` int(10) NOT NULL DEFAULT \'0\',
             `holiday_type` int(10) NOT NULL DEFAULT \'0\',
@@ -54,14 +57,15 @@ class CSetupHolidays
             KEY `holiday_start_end_date` (`holiday_start_date`,`holiday_end_date`),
             KEY `holiday_type` (`holiday_type`),
             KEY `holiday_user` (`holiday_user`)
-            ) ENGINE=MyISAM CHARACTER SET=utf8 COLLATE=utf8_general_ci
-        ');
+            ) 
+            ENGINE=MyISAM CHARACTER SET=utf8 COLLATE=utf8_general_ci';
+        $q->createDefinition($sql);
         $q->exec();
         $q->clear();
 
         // Create settings table
         $q->createTable('holiday_settings');
-        $q->createDefinition('(
+        $sql = '(
             `holiday_manual` int(10) NOT NULL default \'0\',
             `holiday_auto` int(10) NOT NULL default \'0\',
             `holiday_driver` int(10) NOT NULL default \'-1\',
@@ -70,8 +74,9 @@ class CSetupHolidays
             UNIQUE KEY `holiday_auto` (holiday_auto),
             UNIQUE KEY `holiday_driver` (holiday_driver),
             UNIQUE KEY `holiday_filter` (holiday_filter)
-            ) ENGINE=MyISAM CHARACTER SET=utf8 COLLATE=utf8_general_ci
-        ');
+            ) 
+            ENGINE=MyISAM CHARACTER SET=utf8 COLLATE=utf8_general_ci';
+        $q->createDefinition($sql);
         $q->exec();
         $q->clear();
 
@@ -94,35 +99,9 @@ class CSetupHolidays
             $q->addInsert('sysval_value_id', $i++);
             $q->exec();
         }
-
-        $perms = $AppUI->acl();
-        return $perms->registerModule('Holiday', 'holiday');
-    }
- 
-    public function remove()
-    {
-        global $AppUI;
-        $q = new w2p_Database_Query();
-        $q->dropTable('holiday');
-        $q->exec();
-        $q->clear();
-
-        $q->dropTable('holiday_settings');
-        $q->exec();
-        $q->clear();
-// do we need to delete this?
-//        $q->setDelete('modules');
-//        $q->addWhere("mod_directory = 'holiday'");
-//        $q->exec();
-//        $q->clear();
-
-        $q->setDelete('sysvals');
-        $q->addWhere("sysval_title = 'UserHolidayType'");
-        $q->exec();
+        return parent::install();
+	}
         
-        $perms = $AppUI->acl();
-        return $perms->unregisterModule('holiday');
-    }
     /**
     * not sure that this function has any relevance
     * look at deleting
@@ -158,9 +137,31 @@ class CSetupHolidays
                 $q->createDefinition('index holiday_type (holiday_type)');
                 $q->exec();
                 $q->clear();
-
+                
+            case '2.0':    //previous running version with NZ dates
+            	
+            case '2.1':    //current version
             default:
+                	//do nothing
         }
         return true;
+    }
+    public function remove()
+    {
+//        global $AppUI;
+        $q = $this->_getQuery();
+        $q->dropTable('holiday');
+        $q->exec();
+        $q->clear();
+
+        $q->dropTable('holiday_settings');
+        $q->exec();
+        $q->clear();
+
+        $q->setDelete('sysvals');
+        $q->addWhere("sysval_title = 'UserHolidayType'");
+        $q->exec();
+
+        return parent::remove();
     }
 }

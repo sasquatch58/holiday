@@ -115,12 +115,22 @@ class Date_Holidays_Driver_NewZealand extends Date_Holidays_Driver
         /**
          * Waitangi Day
          * always observed on 6 February
+         * "Mondayised" in 2013 effective 2014
          */
         $waitangiDay = new Date($this->_year . '-02-06');
         $this->_addHoliday(
             'waitangiDay', $waitangiDay, 'Waitangi Day'
         );
-
+        if ($waitangiDay->getDayOfWeek() == 6) {
+        	$this->_addHoliday(
+        		'waitangiDay', $this->_year . '-02-08', 'Waitangi Day Holiday'
+        	);
+        }  elseif ($waitangiDay->getDayOfWeek() == 0) {
+        	$this->_addHoliday(
+        		'waitangiDay', $this->_year . '-02-07', 'Waitangi Day Holiday'
+        	);
+        } 
+        
         /**
          * Easter
          */
@@ -137,12 +147,21 @@ class Date_Holidays_Driver_NewZealand extends Date_Holidays_Driver
         /**
          * Anzac Day
          * always observed on 25 April
-         * differs from Australia in that there is no working day lost if Anzac Day falls on a weekend
+         * holiday "Mondayised" in 2013, effective 2014
          */
         $anzacDay = new Date($this->_year . '-04-25');
         $this->_addHoliday(
             'anzacDay', $anzacDay, 'Anzac Day'
         );
+        if ($anzacDay->getDayOfWeek() == 6) {
+        	$this->_addHoliday(
+        			'anzacDay', $this->_year . '-04-27', 'Anzac Day Holiday'
+        	);
+        }  elseif ($anzacDay->getDayOfWeek() == 0) {
+        	$this->_addHoliday(
+        			'anzacDay', $this->_year . '-04-26', 'Anzac Day Holiday'
+        	);
+        }
         
         /**
          * The Queen's Birthday.
