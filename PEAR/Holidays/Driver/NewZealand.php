@@ -93,18 +93,18 @@ class Date_Holidays_Driver_NewZealand extends Date_Holidays_Driver
                 'dayAfterNewYearsDay', $this->_year . '-01-02', 'Day after New Year\'s Day'
             );
             $this->_addHoliday(
-                'newYearsDayHoliday', $this->_year . '-01-03', 'New Year\'s Holiday'
+                'newYearsDayHoliday', $this->_year . '-01-03', 'New Year\'s Day Holiday'
             );
         } elseif ($newYearsDay->getDayOfWeek() == 5) {
             $this->_addHoliday(
-                'dayAfterNewYearsDay', $this->_year . '-01-04', 'New Year\'s Holiday'
+                'dayAfterNewYearsDay', $this->_year . '-01-04', 'Day after New Year\'s Day Holiday'
             );
         }  elseif ($newYearsDay->getDayOfWeek() == 6) {
             $this->_addHoliday(
-                'newYearsDayHoliday', $this->_year . '-01-03', 'New Year\'s Holiday'
+                'newYearsDayHoliday', $this->_year . '-01-03', 'New Year\'s Day Holiday'
             );
             $this->_addHoliday(
-                'dayAfterNewYearsDay', $this->_year . '-01-04', 'New Year\'s Holiday'
+                'dayAfterNewYearsDay', $this->_year . '-01-04', 'Day after New Year\'s Day Holiday'
             );
         } else {
             $this->_addHoliday(
