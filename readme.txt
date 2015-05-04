@@ -39,7 +39,7 @@ INSTALL
 =====================================
 
 1.  To install this module, please follow the standard module installation 
-procedure.  Download the latest version from Sourceforge and unzip 
+procedure.  Download the latest version from github and unzip 
 this directory into your web2project/modules directory.
 
 2.  Select to System Admin -> View Modules and you should see "holiday" near 
@@ -49,14 +49,4 @@ the bottom of the list.
 select "hidden" and then "disabled" to make it display in your module 
 navigation.
 
-
-3. Open the dateclass in the editor of choise:
-	vi /path/to/web2project/classes/w2p/Utilities/Date.class.php
-4. Paste the following in the beginning of the isWorkingDay function (Line 148)
-		if ($AppUI->isActiveModule('holiday')) {
-			// Holiday module, check the holiday database
-			require_once W2P_BASE_DIR."/modules/holiday/holiday_functions.class.php";
-			if(HolidayFunctions::isHoliday($this)) {
-				return false;
-			}
-		}
+4. The Holiday module is automatically supported by w2p date class.
