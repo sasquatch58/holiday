@@ -1,11 +1,12 @@
 ##
 ## DO NOT MODIFY THIS FILE BY HAND!
 ##
+'to',
 'A module for registering non-working days'=>'Un module permettant d\'enregistrer les jours non-travaillés',
 'Add'=>'Ajouter',
 'Add holiday'=>'Ajouter jour chômé',
-'Add to public holidays'=>'Ajouter aux jours chomés',
-'Add to user holidays'=>'Ajouter aux congés/absences',
+'Add to Public Holidays'=>'Ajouter aux jours chomés',
+'Add to User Holidays'=>'Ajouter aux congés/absences',
 'Add to working days'=>'Ajouter aux jours travaillés',
 'Add workday'=>'Ajour jour travaillé',
 'Adding holidays/working days'=>'Ajout de jours travaillés/absences',
@@ -17,10 +18,10 @@
 'Calendar'=>'Calendrier',
 'Calendar Options'=>'Options du calendrier',
 'Calendar Workday'=>'Jour ouvré',
-'Calendar holiday'=>'Jour férié',
+'Calendar Holiday'=>'Jour férié',
 'Cancel'=>'Annuler',
 'Company Workday'=>'Jour férié travaillé',
-'Company holiday'=>'Jour chômé',
+'Company Holiday'=>'Jour chômé',
 'Company working time'=>'Temps de travail de la société',
 'Days selection help'=>'Sélectionnez les jours en faisant glisser le pointeur de la souris sur les cases du calendrier ci-contre. Maintenez enfoncée la touche Ctrl pour faire plusieurs sélections non adjacentes ou pour désélectionner un jour particulier. Choisir ce qu\'il faut faire avec ces jours en cliquant sur un des boutons ci-dessous.',
 'Description'=>'Description',
