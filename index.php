@@ -13,7 +13,7 @@ $titleBlock->show();
 
 // tabbed information boxes
 $tabBox = new CTabBox("?m=$m", W2P_BASE_DIR . "/modules/$m/", $tab);
-//if (canEdit('admin')) $tabBox->add("holiday_settings", "Company working time");
+if (canEdit( $m )) $tabBox->add("holiday_settings", "Company working time");
 $tabBox->add("holiday_settings", "Company working time");
 $tabBox->add("holiday", "User holidays");
 $tabBox->show();
