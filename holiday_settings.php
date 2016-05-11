@@ -294,7 +294,7 @@ $.getScript ("modules/holiday/lib/ui-selectable/jquery.ui.core.js", function () 
                             $dow = substr($day, 0, 1);
                             $checked = in_array($dow, $cal_working_days) ? ' checked="checked"' : '';
                             ?>
-                            <li><input type="checkbox" name="cal_working_day" value="<?php echo $dow; ?>"<?php echo $checked; ?>><?php echo $AppUI->_(substr($day, 1));?></input></li>
+                            <li><input type="checkbox" name="cal_working_day" value="<?php echo $dow; ?>"<?php echo $checked; ?>><?php echo $AppUI->_(substr($day, 1));?> /></li>
                             <?php } ?>
                             <li><?php echo $AppUI->_('Working times');?> : <input type="text" class="cal_day" name="cal_day_start" size="5" value="<?php echo w2PgetConfig("cal_day_start"); ?>" /></li>
                             <li><?php echo $AppUI->_('to');?> <input type="text" class="cal_day" name="cal_day_end" size="5" value="<?php echo w2PgetConfig("cal_day_end"); ?>" /></li>
