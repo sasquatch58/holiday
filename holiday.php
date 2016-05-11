@@ -366,7 +366,7 @@ $.getScript ("modules/holiday/lib/ui-selectable/jquery.ui.core.js", function () 
                             <input class="button" type="button" name="addNewHolidays" onclick="cancelUserHolidays();" value="<?php echo $AppUI->_( 'Cancel' ); ?>" />
                         </div>
                         <div id="holiday-choices-buttons">
-                            <input class="button" type="button" name="addNewHolidays" onclick="getUserHolidaysOptions(this.form);" value="<?php echo $AppUI->_( 'Add to user holidays' ); ?>" /><br />
+                            <input class="button" type="button" name="addNewHolidays" onclick="getUserHolidaysOptions(this.form);" value="<?php echo $AppUI->_( 'Add to User Holidays' ); ?>" /><br />
                             <input class="button" type="button" name="addNewWorkdays" onclick="getWorkingDaysOptions(this.form);" value="<?php echo $AppUI->_( 'Add to working days' ); ?>" /><br />
                         </div>
                     </fieldset>
@@ -379,11 +379,11 @@ $.getScript ("modules/holiday/lib/ui-selectable/jquery.ui.core.js", function () 
                             <span class="ui-calendar-workday">&nbsp;&nbsp;&nbsp;</span>
                             &nbsp;&nbsp;<?php echo $AppUI->_('Company Workday'); ?>
                             <span class="ui-company-workday">&nbsp;&nbsp;&nbsp;</span>
-                            &nbsp;&nbsp;<?php echo $AppUI->_('Calendar holiday'); ?>
+                            &nbsp;&nbsp;<?php echo $AppUI->_('Calendar Holiday'); ?>
                             <span class="ui-calendar-holiday">&nbsp;&nbsp;&nbsp;</span>
-                            &nbsp;&nbsp;<?php echo $AppUI->_('Company holiday'); ?>
+                            &nbsp;&nbsp;<?php echo $AppUI->_('Company Holiday'); ?>
                             <span class="ui-company-holiday">&nbsp;&nbsp;&nbsp;</span>
-                            &nbsp;&nbsp;<?php echo $AppUI->_('User holiday'); ?>
+                            &nbsp;&nbsp;<?php echo $AppUI->_('User Holiday'); ?>
                             <span class="ui-user-holiday">&nbsp;&nbsp;&nbsp;</span>
                             &nbsp;&nbsp;<?php echo $AppUI->_('Selected days'); ?>
                             <span class="ui-selected">&nbsp;&nbsp;&nbsp;</span>
